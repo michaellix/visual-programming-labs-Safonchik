@@ -1,0 +1,160 @@
+[
+    {
+        "id": "cffa3ad4ef8e43c4",
+        "type": "tab",
+        "label": "11-files",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "48165a8409d66f91",
+        "type": "inject",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "inject-write",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "0becd2f71bda272b"
+            ]
+        ]
+    },
+    {
+        "id": "0becd2f71bda272b",
+        "type": "function",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "fn-write-json",
+        "func": "msg.payload = JSON.stringify({\n    author: \"safonchik\",\n    timestamp: new Date().toISOString(),\n    data: [1, 2, 3, 4, 5]\n}, null, 2);\nmsg.filename = \"/data/lab2-test.json\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 380,
+        "wires": [
+            [
+                "e3a705cf43b1bf7e",
+                "579f2255aaf1758e"
+            ]
+        ]
+    },
+    {
+        "id": "e3a705cf43b1bf7e",
+        "type": "file",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "file-write",
+        "filename": "/data/lab2-test.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 740,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "579f2255aaf1758e",
+        "type": "debug",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "debug-written",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "828bba77e06f6966",
+        "type": "inject",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "inject-read",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 300,
+        "y": 540,
+        "wires": [
+            [
+                "ce3fa84f7d0cbe28"
+            ]
+        ]
+    },
+    {
+        "id": "ce3fa84f7d0cbe28",
+        "type": "file in",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "file-read",
+        "filename": "/data/lab2-test.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 480,
+        "y": 540,
+        "wires": [
+            [
+                "1865926a2a3822ff"
+            ]
+        ]
+    },
+    {
+        "id": "1865926a2a3822ff",
+        "type": "debug",
+        "z": "cffa3ad4ef8e43c4",
+        "name": "debug-read",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 540,
+        "wires": []
+    }
+]
