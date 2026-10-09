@@ -1,0 +1,142 @@
+[
+    {
+        "id": "efc7698f749a1d6e",
+        "type": "tab",
+        "label": "12-context",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5d0232a2ac7b9610",
+        "type": "inject",
+        "z": "efc7698f749a1d6e",
+        "name": "inject-inc",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "fc9ef7a0c8bd8911"
+            ]
+        ]
+    },
+    {
+        "id": "fc9ef7a0c8bd8911",
+        "type": "function",
+        "z": "efc7698f749a1d6e",
+        "name": "fn-increment",
+        "func": "let counter = flow.get(\"counter\") || 0;\ncounter += 1;\nflow.set(\"counter\", counter);\n\nmsg.payload = {\n    counter: counter,\n    message: `Счётчик увеличен. Текущее значение: ${counter}`,\n    author: \"safonchik\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "af9e1f7316ce55d0"
+            ]
+        ]
+    },
+    {
+        "id": "af9e1f7316ce55d0",
+        "type": "debug",
+        "z": "efc7698f749a1d6e",
+        "name": "debug-counter",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "81eb4eb181861dc9",
+        "type": "inject",
+        "z": "efc7698f749a1d6e",
+        "name": "inject-reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "dacb73d2845c6362"
+            ]
+        ]
+    },
+    {
+        "id": "dacb73d2845c6362",
+        "type": "function",
+        "z": "efc7698f749a1d6e",
+        "name": "fn-reset",
+        "func": "flow.set(\"counter\", 0);\nmsg.payload = { message: \"Счётчик сброшен\", counter: 0 };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 380,
+        "wires": [
+            [
+                "467928520c297cd6"
+            ]
+        ]
+    },
+    {
+        "id": "467928520c297cd6",
+        "type": "debug",
+        "z": "efc7698f749a1d6e",
+        "name": "debug-reset",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 380,
+        "wires": []
+    }
+]
