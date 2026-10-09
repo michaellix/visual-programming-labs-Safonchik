@@ -1,0 +1,9 @@
+# Данные Node-RED (создаются автоматически)
+data/
+node_modules/
+
+# Системные файлы macOS
+.DS_Store
+
+# Логи
+*.log
