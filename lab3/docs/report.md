@@ -1,7 +1,6 @@
 # Лабораторная работа №3. Bubble
 
 **Тема:** План тренировок
-Сафончик
 
 
 ## Часть 1. Промпт и генерация каркаса
@@ -110,8 +109,68 @@ AI Bubble сгенерировал для каждого запроса перс
 
 ### 3.4. Готовый компонент
 Из библиотеки Components добавлен footer и настроен под тематику сайта 
-![05-component](screenshots/05-component.png)
+![05-component](../screenshots/05-component.png)
 
 ## Часть 4. Data и Workflows
-...
 
+**AI-промпт для сущности:**
+Придумай название и поля для новой сущности в приложении
+«План тренировок». Нужно минимум 3 поля разных типов: текст,
+дата, да/нет. Сущность должна описывать одну тренировку и её детали.
+
+**Сущности**
+![06-data-type](../screenshots/06-data-type.png)
+![06-data-type-2](../screenshots/06-data-type-2.png)
+
+Также добавлены 3 записи вручную через App Data:
+
+![07-data-records](../screenshots/07-data-records.png)
+
+### 4.2. Workflows: CRUD
+
+**Проверено в Preview:** все  операции CRUD (Create, Read, Update,
+Delete) работают корректно.
+![08-workflow-create](../screenshots/08-workflow-create.png)
+
+Все workflow:
+
+Добавить тренировку:
+![09-workflow-create](../screenshots/08-workflow-create.png)
+
+Внести изменения:
+![09-workflow-edit](../screenshots/09-workflow-change.png)
+
+Изменить тренировку(окончательно):
+![09-workflow-save](../screenshots/09-workflow-edit.png)
+
+Сохранить:
+![09-workflow-change](../screenshots/09-workflow-save.png)
+
+Отменить:
+![09-workflow-cancel](../screenshots/09-workflow-cancel.png)
+
+Удалить:
+![09-workflow-delete](../screenshots/09-workflow-delete.png)
+
+Навигация на страницу с тренировками:
+![navigation.png](../screenshots/navigation.png)
+
+Навигация на главную:
+![navigation-2.png](../screenshots/navigation-2.png)
+
+
+Ссылка:
+https://michaelsafonchik.bubbleapps.io/version-test?debug_mode=true
+
+
+Выводы:
+
+В ходе работы я освоил Bubble на базовом уровне:
+
+- Сгенерировал каркас приложения через AI-агента Bubble.
+- Изучил Build Guides, выбрал фичи уровня MODERATE и применил идею Progress tracking.
+- Освоил ручную доработку UI
+- Создал сущность Тренировка с полями разных типов.
+- Реализовал полный CRUD через workflows: Create, Read, Update, Delete.
+- Настроил навигацию между страницами.
+- Понял, как AI ускоряет разработку
