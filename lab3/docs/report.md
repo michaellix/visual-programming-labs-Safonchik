@@ -132,7 +132,7 @@ AI Bubble сгенерировал для каждого запроса перс
 Delete) работают корректно.
 ![08-workflow-create](../screenshots/08-workflow-create.png)
 
-Все workflow:
+**Все workflow:**
 
 Добавить тренировку:
 ![09-workflow-create](../screenshots/08-workflow-create.png)
