@@ -61,18 +61,30 @@ AI Bubble сгенерировал для каждого запроса перс
 - Progress Bar для отображения прогресса (из Progress tracking).
 
 ### Применение идеи: «До» и «После»
+
 **Идея:** Progress tracking через Progress Bar.
+Взято из Build Guide «Start building your Workout Tracker»
+(фича Progress tracking, MODERATE).
 
-**До:** страница workouts содержала только список тренировок
-(Repeating Group) без индикатора прогресса.
-
-**После:** над списком добавлен Progress Bar из плагина Progress Bar.
-- Value = Search for Workouts:filtered (Completed = yes):count
-- Max = Search for Workouts:count
-
-Теперь пользователь сразу видит, какой процент тренировок выполнен.
+**До:** страница содержала форму «Новая тренировка» и список
+«Ваши тренировки» без индикатора прогресса.
+Пользователь не видел, сколько тренировок уже выполнено.
 
 ![02-buildguide-before](screenshots/02-buildguide-before.png)
+
+**После:** в шапку добавлено имя «ТВП: Сафончик»,
+а между формой и списком добавлен Progress Bar,
+показывающий процент выполненных тренировок.
+
+Настройки Progress Bar:
+- Value = `Search for Workouts:filtered (Completed = yes):count`
+- Max value = `Search for Workouts:count`
+- Bar color = `#2E7D32`
+- Background color = `#EEEEEE`
+
+Под Progress Bar добавлена динамическая подпись:
+«Прогресс: выполнено X из Y тренировок».
+
 ![02-buildguide-after](screenshots/02-buildguide-after.png)
 
 ## Часть 3. Ручная доработка UI
@@ -81,8 +93,3 @@ AI Bubble сгенерировал для каждого запроса перс
 ## Часть 4. Data и Workflows
 ...
 
-## Часть 5. Ачивки
-...
-
-## Часть 6. Отчёт и защита
-...
