@@ -1,12 +1,12 @@
 # Лабораторная работа №3. Bubble
 
 **Тема:** План тренировок
-**Студент:** Сафончик
-**Платформа:** Bubble (бесплатный план)
+Сафончик
+
 
 ## Часть 1. Промпт и генерация каркаса
 
-### Промпт (дословно)
+### Промпт
 Создай приложение на тему «План тренировок»
 Пусть этот сайт будет публичный
 Страницу обязательно создай по структуре header + body + footer
@@ -28,10 +28,10 @@ AI Bubble сгенерировал для каждого запроса перс
 рекомендованных фич (Build Guides) с пометками сложности MODERATE / CHALLENGING.
 
 ### Скриншоты генераций:
-![02-buildguide-search-1](screenshots/search-1-workout-tracker-app.png)
-![02-buildguide-search-2](screenshots/search-2-fitness-tracker-app.png)
-![02-buildguide-search-3](screenshots/search-3-training-plan-app.png)
-![02-buildguide-search-4](screenshots/search-4-workout-schedule-app.png)
+![02-buildguide-search-1](../screenshots/search-1-workout-tracker-app.png)
+![02-buildguide-search-2](../screenshots/search-2-fitness-tracker-app.png)
+![02-buildguide-search-3](../screenshots/search-3-training-plan-app.png)
+![02-buildguide-search-4](../screenshots/search-4-workout-schedule-app.png)
 
 ### Выбранные Build Guides
 
@@ -70,7 +70,7 @@ AI Bubble сгенерировал для каждого запроса перс
 «Ваши тренировки» без индикатора прогресса.
 Пользователь не видел, сколько тренировок уже выполнено.
 
-![02-buildguide-before](screenshots/02-buildguide-before.png)
+![02-buildguide-before](../screenshots/02-buildguide-before.png)
 
 **После:** в шапку добавлено имя «ТВП: Сафончик»,
 а между формой и списком добавлен Progress Bar,
@@ -79,33 +79,34 @@ AI Bubble сгенерировал для каждого запроса перс
 Настройки Progress Bar:
 - Value = `Search for Workouts:filtered (Completed = yes):count`
 - Max value = `Search for Workouts:count`
-- Bar color = #2E7D32
-- Background color = #EEEEEE
+- Bar color = `#2E7D32`
+- Background color = `#EEEEEE`
 
 Под Progress Bar добавлена динамическая подпись:
 «Прогресс: выполнено X из Y тренировок».
 
-![02-buildguide-after](screenshots/02-buildguide-after.png)
+![02-buildguide-after](../screenshots/02-buildguide-after.png)
 
 ## Часть 3. Ручная доработка UI
 ### 3.1. Изменение заголовка
 В шапке и подвале текст заменён на «ТВП: Сафончик Михаил».
 
-![03-title](screenshots/03-title.png)
+![03-title](../screenshots/03-title.png)
 
 ### 3.2. Global variable для цвета
 Создана переменная primary-color
 Применена к кнопке «Добавить тренировку» (Background color).
 
-![03-global-variable](screenshots/03-global-variable.png)
-![03-global-variable](screenshots/03-global-variable-result.png)
+![03-global-variable](../screenshots/03-global-variable.png)
+![03-global-variable](../screenshots/03-global-variable-result.png)
+
 ### 3.3. Новый стиль
 Создан стиль Primary Button для кнопок.
 Использует primary-color как фон, белый текст, скруглённые углы.
 Применён к кнопке «Добавить тренировку».
-![04-style](screenshots/04-style-settings.png)
-![04-style](screenshots/04-style.png)
-![04-style](screenshots/04-style-result.png)
+![04-style](../screenshots/04-style-settings.png)
+![04-style](../screenshots/04-style.png)
+![04-style](../screenshots/04-style-result.png)
 
 ### 3.4. Готовый компонент
 Из библиотеки Components добавлен footer и настроен под тематику сайта 
