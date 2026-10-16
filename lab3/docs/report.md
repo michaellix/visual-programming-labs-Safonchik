@@ -79,8 +79,8 @@ AI Bubble сгенерировал для каждого запроса перс
 Настройки Progress Bar:
 - Value = `Search for Workouts:filtered (Completed = yes):count`
 - Max value = `Search for Workouts:count`
-- Bar color = `#2E7D32`
-- Background color = `#EEEEEE`
+- Bar color = #2E7D32
+- Background color = #EEEEEE
 
 Под Progress Bar добавлена динамическая подпись:
 «Прогресс: выполнено X из Y тренировок».
@@ -88,7 +88,28 @@ AI Bubble сгенерировал для каждого запроса перс
 ![02-buildguide-after](screenshots/02-buildguide-after.png)
 
 ## Часть 3. Ручная доработка UI
-...
+### 3.1. Изменение заголовка
+В шапке и подвале текст заменён на «ТВП: Сафончик Михаил».
+
+![03-title](screenshots/03-title.png)
+
+### 3.2. Global variable для цвета
+Создана переменная primary-color
+Применена к кнопке «Добавить тренировку» (Background color).
+
+![03-global-variable](screenshots/03-global-variable.png)
+![03-global-variable](screenshots/03-global-variable-result.png)
+### 3.3. Новый стиль
+Создан стиль Primary Button для кнопок.
+Использует primary-color как фон, белый текст, скруглённые углы.
+Применён к кнопке «Добавить тренировку».
+![04-style](screenshots/04-style-settings.png)
+![04-style](screenshots/04-style.png)
+![04-style](screenshots/04-style-result.png)
+
+### 3.4. Готовый компонент
+Из библиотеки Components добавлен footer и настроен под тематику сайта 
+![05-component](screenshots/05-component.png)
 
 ## Часть 4. Data и Workflows
 ...
