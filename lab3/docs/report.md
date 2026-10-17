@@ -28,7 +28,7 @@ AI Bubble сгенерировал для каждого запроса перс
 
 ### Скриншоты генераций:
 Промпт:
-![02-buildguide-prompt](../screenshots/search-1-workout-tracker-app.png)
+![02-buildguide-prompt](../screenshots/02-buildguide-prompt.png)
 workout tracker app:
 ![02-buildguide-search-1](../screenshots/search-1-workout-tracker-app.png)
 fitness tracker app:
