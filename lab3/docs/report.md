@@ -17,19 +17,25 @@
 
 ## Часть 2. Исследование идеи (Build Guides)
 
-Я ввёл в строку поиска Build Guides 4 запроса:
+Я ввёл в строку поиска Build Guides свой промпт и 4 запроса:
 1. workout tracker app
 2. fitness tracker app
-3. training plann app
+3. training plan app
 4. workout schedule app
 
 AI Bubble сгенерировал для каждого запроса персонализированный список
 рекомендованных фич (Build Guides) с пометками сложности MODERATE / CHALLENGING.
 
 ### Скриншоты генераций:
+Промпт:
+![02-buildguide-prompt](../screenshots/search-1-workout-tracker-app.png)
+workout tracker app:
 ![02-buildguide-search-1](../screenshots/search-1-workout-tracker-app.png)
+fitness tracker app:
 ![02-buildguide-search-2](../screenshots/search-2-fitness-tracker-app.png)
+training plan app:
 ![02-buildguide-search-3](../screenshots/search-3-training-plan-app.png)
+workout schedule app:
 ![02-buildguide-search-4](../screenshots/search-4-workout-schedule-app.png)
 
 ### Выбранные Build Guides
@@ -43,7 +49,7 @@ AI Bubble сгенерировал для каждого запроса перс
 **2. Progress tracking (MODERATE)**
 Из гайда «Start building your Workout Tracker».
 Описание: визуализация прогресса тренировок во времени.
-Что взял: Progress Bar, показывающий процент выполненных тренировок.
+Взял Progress Bar, показывающий процент выполненных тренировок.
 
 ### Что просмотрел
 - Как AI Bubble формирует персонализированные рекомендации по фичам.
@@ -53,10 +59,6 @@ AI Bubble сгенерировал для каждого запроса перс
 ### Что показалось полезным
 - Разметка сложности (MODERATE/CHALLENGING) помогает не брать слишком сложные фичи.
 - Progress tracking можно реализовать не через громоздкий dashboard, а через простой Progress Bar.
-
-### Что взял в своё приложение
-- CRUD-структуру для сущности Workout (из Workout logging).
-- Progress Bar для отображения прогресса (из Progress tracking).
 
 ### Применение идеи: «До» и «После»
 
