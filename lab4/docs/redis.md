@@ -20,8 +20,8 @@ docker run -d --name redis-lab4 -p 6379:6379 redis:7
 - В результате выполнения во втором узле мы видим записанное значение, что подтверждает успешную запись и чтение.
 
 Скриншоты
-![Схема Flow 09](screenshots/flow-09-redis.png)
-![Результат Flow 09](screenshots/flow-09-redis-output.png)
+![Схема Flow 09](../screenshots/flow-09-redis.png)
+![Результат Flow 09](../screenshots/flow-09-redis-output.png)
 
 ## 4. Flow 10 — Удаление и проверка отсутствия ключа
 Цель: Удалить созданный ранее ключ и убедиться, что его больше нет.
@@ -32,5 +32,5 @@ docker run -d --name redis-lab4 -p 6379:6379 redis:7
 - Во втором узле Get мы пытаемся прочитать этот же ключ. Так как он удален, узел возвращает пустой результат (или null), что доказывает успешное удаление.
 
 Скриншоты Flow 10:
-![Схема Flow 10](screenshots/flow-10-redis.png)
-![Результат Flow 10](screenshots/flow-10-redis-output.png)
+![Схема Flow 10](../screenshots/flow-10-redis.png)
+![Результат Flow 10](../screenshots/flow-10-redis-output.png)

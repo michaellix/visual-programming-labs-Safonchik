@@ -26,14 +26,14 @@
 ## 4. Скриншоты workflow
 
 *   **Запуск в Docker:** ![docker-run](../screenshots/docker-run.png)
-*   **Flow 01 (Manual-Set-Code):** ![flow-01](../screenshots/flow-01-manual-set.png), Результат: ![flow-01-out](../screenshots/flow-01-manual-set-output.png)
-*   **Flow 02 (Code):** ![flow-02](../screenshots/flow-02-code.png), Результат: ![flow-02-out](../screenshots/flow-02-code-output.png)
-*   **Flow 03 (IF):** ![flow-03](screenshots/flow-03-if.png), Результат: ![flow-03-out](screenshots/flow-03-if-output.png)
-*   **Flow 04 (Set):** ![flow-04](screenshots/flow-04-set.png), Результат: ![flow-04-out](screenshots/flow-04-set-output.png)
-*   **Flow 05 (HTTP):** ![flow-05](screenshots/flow-05-http.png), Результат: ![flow-05-out](screenshots/flow-05-http-output.png)
-*   **Flow 06 (Schedule):** ![flow-06](screenshots/flow-06-schedule.png), Результат: ![flow-06-out](screenshots/flow-06-schedule-output.png)
-*   **Flow 09 (Redis Set/Get):** ![flow-09](screenshots/flow-09-redis.png), Результат: ![flow-09-out](screenshots/flow-09-redis-output.png)
-*   **Flow 10 (Redis Delete/Get):** ![flow-10](screenshots/flow-10-redis.png), Результат: ![flow-10-out](screenshots/flow-10-redis-output.png)
+*   **Flow 01 (Manual-Set-Code):** ![flow-01](../screenshots/flow-01-manual-set.png) Результат: ![flow-01-out](../screenshots/flow-01-manual-set-output.png)
+*   **Flow 02 (Code):** ![flow-02](../screenshots/flow-02-code.png) Результат: ![flow-02-out](../screenshots/flow-02-code-output.png)
+*   **Flow 03 (IF):** ![flow-03](../screenshots/flow-03-if.png) Результат: ![flow-03-out](../screenshots/flow-03-if-output.png)
+*   **Flow 04 (Set):** ![flow-04](../screenshots/flow-04-set.png) Результат: ![flow-04-out](../screenshots/flow-04-set-output.png)
+*   **Flow 05 (HTTP):** ![flow-05](../screenshots/flow-05-http.png) Результат: ![flow-05-out](../screenshots/flow-05-http-output.png)
+*   **Flow 06 (Schedule):** ![flow-06](../screenshots/flow-06-schedule.png) Результат: ![flow-06-out](../screenshots/flow-06-schedule-output.png)
+*   **Flow 09 (Redis Set/Get):** ![flow-09](../screenshots/flow-09-redis.png) Результат: ![flow-09-out](../screenshots/flow-09-redis-output.png)
+*   **Flow 10 (Redis Delete/Get):** ![flow-10](../screenshots/flow-10-redis.png) Результат: ![flow-10-out](../screenshots/flow-10-redis-output.png)
 
 ## 5. Выполнение ачивки 5.3: REST API для заметок на .json-файле
 
@@ -58,8 +58,8 @@
 5. Файл notes.json был успешно скопирован в папку проекта на Mac, его содержимое проверено через cat.
 
 **Скриншоты:**
-* Схема Workflow: ![Схема](screenshots/11-achievement-api-scheme.png)
-* Успешный ответ API в терминале и содержимое файла notes.json: ![Curl](screenshots/11-achievement-api-curl.png)
+* Схема Workflow: ![Схема](../screenshots/11-achievement-api-scheme.png)
+* Успешный ответ API в терминале и содержимое файла notes.json: ![Curl](../screenshots/11-achievement-api-curl.png)
 
 
 ## 5. Выводы
