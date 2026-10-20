@@ -7,3 +7,5 @@ Thumbs.db
 # Временные файлы
 *.tmp
 *.log
+lab4/docker-data/
+lab4/docker-files/
