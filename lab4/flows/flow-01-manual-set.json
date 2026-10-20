@@ -1,0 +1,95 @@
+{
+  "name": "flow-01-manual-set",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6877f992-bf44-4791-9253-165e61b58fe5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6c382cc0-87da-4917-9101-150b0b98669c",
+              "name": "Payload",
+              "value": "Safonchik",
+              "type": "string"
+            },
+            {
+              "id": "746e83c1-7a29-4d30-b1dd-70a838a5d444",
+              "name": "Topic",
+              "value": "lab4/Safonchik/basic",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d17f7153-3978-46f6-8276-bf0029b01439",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconsole.log(\"Received data:\", data);\nreturn [{ json: data }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "2d51000a-bc10-4dd8-9f9c-82b5b2d6d87f",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "dd9f08c0-7a7a-4635-b7d9-351a0ba90f8e",
+  "meta": {
+    "instanceId": "04bbd922d642e37ef82956b51756cae6f61a6303f544dac744fe0163132b9844"
+  },
+  "nodeGroups": [],
+  "id": "BfKTTH80hZmXdKme",
+  "tags": []
+}

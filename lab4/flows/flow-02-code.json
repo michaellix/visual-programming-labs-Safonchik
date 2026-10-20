@@ -1,0 +1,77 @@
+{
+  "name": "flow-02-code",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fa38d887-29ec-42d6-bab6-fc9b66ca243d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "let payload = \"Safonchik lab4\";\nconst items = [1, 2, 3];\nlet sum = 0;\n\nfor (let i = 0; i < items.length; i++) {\n    sum += items[i];\n}\n\nif (sum > 5) {\n    payload = payload + \" - condition met\";\n} else {\n    payload = payload + \" - condition not met\";\n}\n\nreturn [{ json: { payload, sum, originalArray: items } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "b2696b1b-b244-4428-b6cc-8c5c73099d70",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "39b51df5-dc2d-47aa-a67d-0590b071b4b5",
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6971509c-11f7-425b-acd1-a0ef8308fea7",
+  "meta": {
+    "instanceId": "04bbd922d642e37ef82956b51756cae6f61a6303f544dac744fe0163132b9844"
+  },
+  "nodeGroups": [],
+  "id": "SfdkDFBl3I9pQbPX",
+  "tags": []
+}
