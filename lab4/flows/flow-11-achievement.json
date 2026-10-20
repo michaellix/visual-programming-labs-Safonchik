@@ -1,0 +1,118 @@
+{
+  "name": "flow-11-achievement",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notes",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3a75217e-09cf-410f-9e2d-9bceb8f75725",
+      "name": "Webhook",
+      "webhookId": "4b257c69-1faf-41cb-b938-56a619e18e37"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"success\", \"message\": \"Note saved successfully\"}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        512,
+        0
+      ],
+      "id": "bc738bf9-a006-4e82-91bc-7b754987104e",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/data/notes.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        352,
+        0
+      ],
+      "id": "fb278ea2-fe15-421e-9e70-3a6930d84d64",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "jsCode": "const noteText = $input.first().json.body.note || \"Пустая заметка\";\nconst content = JSON.stringify({ id: Date.now(), text: noteText, date: new Date().toISOString() }, null, 2);\nreturn [{\n    json: {},\n    binary: {\n        data: {\n            data: Buffer.from(content).toString('base64'),\n            mimeType: 'application/json',\n            fileName: 'notes.json'\n        }\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "0a778f79-5dd6-4d6e-b0b9-6613e33a9ac9",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "321dc884-dfb8-4869-8c04-f9d3b9a633d9",
+  "meta": {
+    "instanceId": "04bbd922d642e37ef82956b51756cae6f61a6303f544dac744fe0163132b9844"
+  },
+  "nodeGroups": [],
+  "id": "wE17TLeYl7IyYU2r",
+  "tags": []
+}
