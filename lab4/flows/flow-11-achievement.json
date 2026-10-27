@@ -3,7 +3,13 @@
   "nodes": [
     {
       "parameters": {
-        "httpMethod": "POST",
+        "multipleMethods": true,
+        "httpMethod": [
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE"
+        ],
         "path": "notes",
         "responseMode": "responseNode",
         "options": {}
@@ -11,27 +17,25 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.2,
       "position": [
-        0,
-        0
+        -176,
+        16
       ],
-      "id": "3a75217e-09cf-410f-9e2d-9bceb8f75725",
+      "id": "c612dd5b-cfe5-4b41-a996-5b0947cff99a",
       "name": "Webhook",
-      "webhookId": "4b257c69-1faf-41cb-b938-56a619e18e37"
+      "webhookId": "b754b4db-7422-4a74-83b1-3876a0b47cab"
     },
     {
       "parameters": {
-        "respondWith": "json",
-        "responseBody": "{\"status\": \"success\", \"message\": \"Note saved successfully\"}",
-        "options": {}
+        "jsCode": "const noteText = $input.first().json.body.text || \"Пустая заметка\";\nconst content = JSON.stringify({ \n    id: Date.now().toString(),\n    text: noteText, \n    date: new Date().toISOString() \n}, null, 2);\n\nreturn [{\n    json: {},\n    binary: { data: { data: Buffer.from(content).toString('base64'), mimeType: 'application/json', fileName: 'notes.json' } }\n}];"
       },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        512,
+        176,
         0
       ],
-      "id": "bc738bf9-a006-4e82-91bc-7b754987104e",
-      "name": "Respond to Webhook"
+      "id": "1ccb14aa-d5ee-40ea-987c-3ae3e7ab20ca",
+      "name": "Code in JavaScript"
     },
     {
       "parameters": {
@@ -42,24 +46,180 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1.1,
       "position": [
-        352,
+        384,
         0
       ],
-      "id": "fb278ea2-fe15-421e-9e70-3a6930d84d64",
+      "id": "b585f4ea-a4f3-4d6b-8914-5823362d47b7",
       "name": "Read/Write Files from Disk"
     },
     {
       "parameters": {
-        "jsCode": "const noteText = $input.first().json.body.note || \"Пустая заметка\";\nconst content = JSON.stringify({ id: Date.now(), text: noteText, date: new Date().toISOString() }, null, 2);\nreturn [{\n    json: {},\n    binary: {\n        data: {\n            data: Buffer.from(content).toString('base64'),\n            mimeType: 'application/json',\n            fileName: 'notes.json'\n        }\n    }\n}];"
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"created\"}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        592,
+        0
+      ],
+      "id": "0cb9d811-7841-47bd-9414-131ccf1b0c73",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/data/notes.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        -192
+      ],
+      "id": "d82f9943-4743-4847-84d5-29bb46250187",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Получаем бинарный буфер файла (0 — индекс первого элемента, 'data' — имя поля)\nconst binaryDataBuffer = await this.helpers.getBinaryDataBuffer(0, 'data');\n\n// Преобразуем буфер в строку и парсим JSON\nconst fileContent = JSON.parse(binaryDataBuffer.toString('utf8'));\n\n// Возвращаем данные в формате, который ожидает n8n\nreturn [{ json: { notes: fileContent } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        192,
-        0
+        384,
+        -176
       ],
-      "id": "0a778f79-5dd6-4d6e-b0b9-6613e33a9ac9",
-      "name": "Code in JavaScript"
+      "id": "a40575ed-252d-4351-9b06-374ab7415408",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        608,
+        -160
+      ],
+      "id": "1dbb00c9-d070-45c0-b6b7-d180124e0a43",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/data/notes.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        160
+      ],
+      "id": "f463151c-3d4c-43ce-88fb-9cdd59763706",
+      "name": "Read/Write Files from Disk2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Получаем данные из Webhook напрямую (обходя предыдущий узел)\nconst requestBody = $('Webhook').first().json.body;\nconst noteId = requestBody.id;\nconst newText = requestBody.text;\n\n// Проверка, что ID передан\nif (!noteId) throw new Error(\"Не передан ID заметки для обновления\");\n\n// 2. Пытаемся прочитать файл (если он пуст или его нет - создаем пустой массив)\nlet notesArray = [];\ntry {\n    const binaryData = $input.first().binary.data;\n    if (binaryData) {\n        const fileContent = Buffer.from(binaryData.data, 'base64').toString('utf8');\n        notesArray = JSON.parse(fileContent);\n    }\n} catch (e) {\n    // Если файл битый или пустой, начинаем с пустого массива\n    notesArray = [];\n}\n\n// 3. Обновляем заметку\nconst updatedNotes = notesArray.map(note => {\n    if (note.id == noteId) {\n        return { ...note, text: newText, updatedAt: new Date().toISOString() };\n    }\n    return note;\n});\n\n// 4. Формируем файл для записи\nconst content = JSON.stringify(updatedNotes, null, 2);\n\nreturn [{\n    json: {},\n    binary: {\n        data: {\n            data: Buffer.from(content).toString('base64'),\n            mimeType: 'application/json',\n            fileName: 'notes.json'\n        }\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        176
+      ],
+      "id": "6dcfe5d0-5850-4aa7-83bf-688e932d3d92",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/data/notes.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        192
+      ],
+      "id": "43d535cd-3745-4eb6-919c-593ecfdef460",
+      "name": "Read/Write Files from Disk3"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"updated\"}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        832,
+        192
+      ],
+      "id": "a77ebd4b-11ce-4e8a-9c18-1746a058e421",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/data/notes.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        192,
+        336
+      ],
+      "id": "a0543aaf-82f6-4cba-9e93-1448ca68d133",
+      "name": "Read/Write Files from Disk4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Получаем ID напрямую из Webhook (обходим предыдущий узел)\nconst requestBody = $('Webhook').first().json.body;\nconst noteId = requestBody.id;\n\n// Проверка, что ID передан\nif (!noteId) throw new Error(\"Не передан ID заметки для удаления\");\n\n// 2. Пытаемся прочитать файл (если пустой или его нет - создаем пустой массив)\nlet notesArray = [];\ntry {\n    const binaryData = $input.first().binary.data;\n    if (binaryData) {\n        const fileContent = Buffer.from(binaryData.data, 'base64').toString('utf8');\n        notesArray = JSON.parse(fileContent);\n    }\n} catch (e) {\n    notesArray = [];\n}\n\n// 3. Удаляем заметку (оставляем все, кроме совпадающей по ID)\nconst updatedNotes = notesArray.filter(note => note.id != noteId);\n\n// 4. Формируем файл для записи\nconst content = JSON.stringify(updatedNotes, null, 2);\n\nreturn [{\n    json: {},\n    binary: {\n        data: {\n            data: Buffer.from(content).toString('base64'),\n            mimeType: 'application/json',\n            fileName: 'notes.json'\n        }\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        384
+      ],
+      "id": "121c6945-2096-4095-9ccc-601ddcd4e3cd",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/data/notes.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        704,
+        400
+      ],
+      "id": "f0c19001-d449-461f-b1c2-733607b9f910",
+      "name": "Read/Write Files from Disk5"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"deleted\"}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        912,
+        400
+      ],
+      "id": "4c4c1f23-012c-4a87-ad91-4260cc6736b7",
+      "name": "Respond to Webhook3"
     }
   ],
   "pinData": {},
@@ -68,16 +228,32 @@
       "main": [
         [
           {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Code in JavaScript",
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Read/Write Files from Disk2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Read/Write Files from Disk4",
+            "type": "main",
+            "index": 0
+          }
         ]
-      ]
-    },
-    "Respond to Webhook": {
-      "main": [
-        []
       ]
     },
     "Code in JavaScript": {
@@ -101,18 +277,106 @@
           }
         ]
       ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk3": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk4": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk5": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "321dc884-dfb8-4869-8c04-f9d3b9a633d9",
+  "versionId": "a997f885-55c8-4a16-a142-e7564d97a8f6",
   "meta": {
-    "instanceId": "04bbd922d642e37ef82956b51756cae6f61a6303f544dac744fe0163132b9844"
+    "instanceId": "21677f05e93a3da9cc32fbfbefd1a8e672bd155f365320370152205ced6008b5"
   },
   "nodeGroups": [],
-  "id": "wE17TLeYl7IyYU2r",
+  "id": "4cI3ug3cJnPcvd3M",
   "tags": []
 }
