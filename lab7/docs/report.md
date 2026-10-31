@@ -59,10 +59,59 @@
 
 Кнопка:
 - В базе Rentals кнопка «Mark as Completed» с действием Edit pages → Status = Completed.
-Что я исправил после проверки (вставляете в отчёт)
 
 После проверки ответа ИИ я:
 1. Убрал свойство Client (Title) из Rentals, так как клиент уже связан через Relation с базой Clients — дублирование.
 2. Заменил формулу Equipment.Total Rentals на Rollup (Count) по Relation Rentals — так надёжнее в Notion.
 3. Добавил в Maintenance свойство Status (Select) — в ответе ИИ его не было, а для учёта обслуживания оно нужно.
 4. Уточнил формулу Days: в Notion функция называется dateBetween, а не просто разница.
+
+## 2. Ход выполнения работы (скриншоты)
+
+### Главная страница
+Создано рабочее пространство с указанием фамилии в заголовке.
+![Главная страница](../screenshots/01-main-page.png)
+![Схема модели](../screenshots/02-entity-model.png)
+
+### Связи Relation
+Созданы 4 бады данных и настроены двусторонние связи.
+![Базы данных](../screenshots/03-04-data-base-relations.png)
+![Настройка связей](../screenshots/04-relations-2pt.png)
+
+
+###Наполнение
+ В каждую базу данных добавлено более 10 реалистичных записей при помощи ИИ агента notion
+пропмт: Добавь минимум по 10 записей в каждую базу. Заполни их реалистичными данными, связывая записи между собой (в столбцах Relation выбирай нужные элементы из выпадающего списка).
+![База Equipment](../screenshots/05-data-equipment.png)
+![База Rentals](../screenshots/05-data-rentals.png)
+![База Clients](../screenshots/05-data-clients.png)
+![База Maintenance](../screenshots/05-data-maintenance.png)
+
+
+### Представления (Views)
+Для базы Rentals создано два представления: таблица и канбан.
+![Представления Table и Board](../screenshots/06-views.png)
+
+### Формула
+В базе Rentals добавлено свойство Formula для расчета количества дней аренды.
+![Результат формулы](../screenshots/07-formula.png)
+![Настройка формулы](../screenshots/07-formula-settings.png)
+
+### Кнопка (Button)
+В базу Rentals добавлена кнопка, меняющая статус текущей аренды на "Completed".
+![Кнопка в таблице](../screenshots/08-button.png)
+![Настройка кнопки](../screenshots/08-button-settings.png)
+
+## 3. Ссылка на опубликованную страницу и экспорт
+- **Ссылка на Notion:** [Открыть страницу](https://olive-opera-1f6.notion.site/40acce0733bf800b8d4eeae960012ce1?v=a43c3b987e1b4990a13561841edc66ec&source=copy_link)
+
+## 4. Освоенные компоненты и настройки Notion
+- Создание баз данных (Database) и настройка свойств: Title, Select, Date, Number, Relation, Formula, Button.
+- Настройка связей Relation (включение отображения в обеих базах).
+- Создание разных представлений (Table, Board).
+- Написание формул (`dateBetween`).
+- Настройка автоматизации через кнопки (Button).
+- Публикация страницы в веб (Publish) и экспорт в Markdown.
+
+## 5. Выводы
+В ходе лабораторной работы я освоил создание связанных баз данных в Notion. Notion позволяет организовать данные гораздо удобнее, чем обычные таблицы. Использование ИИ (DeepSeek) помогло быстро спроектировать структуру и не упустить важные типы свойств
